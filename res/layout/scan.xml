@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#27ae60"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ScanActivity" >
+
+    <TextView
+        android:id="@+id/scanText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center_horizontal"
+        android:text="QR Scan"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/ScanButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scanText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/btn_flat"
+        android:fontFamily="sans-serif-condensed"
+        android:onClick="ScanQr"
+        android:padding="10dp"
+        android:paddingBottom="13dp"
+        android:text="Retry"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
+
+    <RelativeLayout
+        android:id="@+id/cameraPreview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignLeft="@+id/scanText"
+        android:layout_below="@+id/scanText"
+        android:layout_marginTop="46dp">
+    </RelativeLayout>
+
+</RelativeLayout>
