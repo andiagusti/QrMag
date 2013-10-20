@@ -78,6 +78,7 @@ public class OopsActivity extends Activity {
 	 public void TryAgain(View v) {
 			// Open the QR Scan page
 			Intent a = new Intent(OopsActivity.this, ScanActivity.class);
+	        a.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 	        startActivity(a);
 		}
 	

@@ -53,14 +53,16 @@ public class ScanActivity extends Activity
 {
 	// Some variables
     private Camera sCam;
+    boolean funnylmsg;
     private QrScanClass qrPrev;
     private Handler handlerAF;
     Button retryButton;
     ImageScanner imgScanner;
     private boolean isQrScanned = false;
     private boolean isPreviewing = true;
+   
     static {
-        System.loadLibrary("iconv"); // Load the QR scanning library
+    System.loadLibrary("iconv"); // Load the QR scanning library
     } 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,13 @@ public class ScanActivity extends Activity
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.scan);
         
+        try {
+    		funnylmsg = getIntent().getBooleanExtra("useFunnyLoadingMessage", false);
+    		} catch (Exception e) {
+    		 // Looks like the user didn't enable easter egg
+    			funnylmsg = false;
+    		}
+    		
         // Initialize animations
         Animation a = new TranslateAnimation(1000,0,0,0); 
 		Animation a1 = new TranslateAnimation(1000,0,0,0);
@@ -209,8 +218,9 @@ public class ScanActivity extends Activity
                     	isQrScanned = true;
                         Intent a = new Intent(ScanActivity.this, LoadingActivity.class);
                         a.putExtra("tag", scantag);
+                        if (funnylmsg == true) { a.putExtra("useFunnyLoadingMessage", true); }
+                        a.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(a);
-                        finish();
                     } 
                 }
             }

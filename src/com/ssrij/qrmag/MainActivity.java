@@ -33,10 +33,12 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
 	int voltimes = 0;
+	boolean funnylmsg = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +80,18 @@ public class MainActivity extends Activity {
 	public void ScanQr(View v) {
 		// Open the QR Scan page
 		Intent a = new Intent(MainActivity.this, ScanActivity.class);
+		a.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		if (funnylmsg == true) { a.putExtra("useFunnyLoadingMessage", true); }
         startActivity(a);
-        finish();
 	}
 	
+	// Easter egg: Show a witty loading message on the loading screen 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
   	  
-        if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)){
-      	  voltimes = voltimes + 1;
-      	  if (voltimes == 3) {
-      	  // Easter egg soon
-        }
-        }
+        if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)){ voltimes = voltimes + 1; }
+      	if (voltimes == 3) { funnylmsg = true;
+      	Toast.makeText(getApplicationContext(), "Funny loading message easter egg activated!", 2000).show(); }
         return true;
         
     }

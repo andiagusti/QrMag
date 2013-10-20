@@ -40,6 +40,7 @@ import android.widget.TextView;
 public class LoadingActivity extends Activity {
 	
 	String v_tag = new String();
+	boolean funnylmsg;
 	String[] loading_msgs = {"Counting to infinity", "Hacking your parent's phone", "Waiting for the stars to align", "Waiting for the world to turn", "Reading your thoughts", "Checking how you look through your front camera", "Installing Symbian OS on your phone", "Donating your money to the poor people in Greece", "Uploading images from your camera roll", "Sending internet history to your mom", "Flushing all the battery life", "I like to keep you waiting"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,13 @@ public class LoadingActivity extends Activity {
 		
 		// Get tag from intent
 		v_tag = getIntent().getStringExtra("tag");
+		
+		 try {
+	    		funnylmsg = getIntent().getBooleanExtra("useFunnyLoadingMessage", false);
+	    		} catch (Exception e) {
+	    		 // Looks like the user didn't enable easter egg
+	    			funnylmsg = false;
+	    		}
 		
         // Initialize animations
 		Animation a = new TranslateAnimation(1000,0,0,0);
@@ -61,9 +69,21 @@ public class LoadingActivity extends Activity {
 		TextView v = (TextView)findViewById(R.id.Loading);
 		TextView v1 = (TextView)findViewById(R.id.Loading1);
 		
-		 // Randomly select a loading message and set
+		// Check if user enabled easter egg
+		
+		if (funnylmsg == true) {
+		
+		// Randomly select a loading message and set
         Random rnd = new Random();
         v.setText(loading_msgs[rnd.nextInt(loading_msgs.length)]);
+		
+		}
+		
+		// Show normal loading message
+		else { 
+		v.setText("Loading video, please wait a moment");
+		v1.setText("........");
+		}
 		
 		// Clear existing animations, just in case...
 		v.clearAnimation();
@@ -92,8 +112,8 @@ public class LoadingActivity extends Activity {
         	// Animation has ended, let's launch the video now
         	if (v_tag.equals("ad2012_intro")){
         	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:WJRlcx-yCsI"));
+        	i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         	startActivity(i);
-        	finish();
         	
         	// More tags will be supported soon
         	
@@ -102,8 +122,8 @@ public class LoadingActivity extends Activity {
         	else {
         		// Open the Error page
     			Intent a = new Intent(LoadingActivity.this, OopsActivity.class);
+    			a.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
     	        startActivity(a);
-    	        finish();
         	}
          }
      });
