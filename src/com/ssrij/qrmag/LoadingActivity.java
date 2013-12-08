@@ -30,18 +30,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.Button;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 public class LoadingActivity extends Activity {
 	
+	// Required vars
 	String v_tag = new String();
 	boolean funnylmsg;
 	String[] loading_msgs = {"Counting to infinity", "Hacking your parent's phone", "Waiting for the stars to align", "Waiting for the world to turn", "Reading your thoughts", "Checking how you look through your front camera", "Installing Symbian OS on your phone", "Donating your money to the poor people in Greece", "Uploading images from your camera roll", "Sending internet history to your mom", "Flushing all the battery life", "I like to keep you waiting"};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,8 +110,8 @@ public class LoadingActivity extends Activity {
          public void onAnimationEnd(Animation animation) {
         	
         	// Animation has ended, let's launch the video now
-        	if (v_tag.equals("ad2012_intro")){
-        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:WJRlcx-yCsI"));
+        	if (v_tag.equals("cover_page")){
+        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:LL4cBegqag8"));
         	i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         	startActivity(i);
         	

@@ -10,20 +10,6 @@
     tools:context=".ScanActivity" >
 
     <TextView
-        android:id="@+id/Loading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="244dp"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="center_horizontal"
-        android:text="Sending your mobile number to Chuck Norris"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
-
-    <TextView
         android:id="@+id/Loading1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,5 +22,19 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/Loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Loading1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="166dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center_horizontal"
+        android:text="Sending your mobile number to Chuck Norris"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
 </RelativeLayout>

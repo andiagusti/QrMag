@@ -61,6 +61,6 @@
     android:text="QrMag complements the annual school magazine by showing you videos and extra information that correspond to images present throughout the magazine."
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textColor="#FFFFFF"
-    android:textSize="25sp" />
+    android:textSize="20sp" />
 
 </RelativeLayout>

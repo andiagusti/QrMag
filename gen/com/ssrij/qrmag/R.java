@@ -25,8 +25,8 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int Loading=0x7f080005;
-        public static final int Loading1=0x7f080006;
+        public static final int Loading=0x7f080006;
+        public static final int Loading1=0x7f080005;
         public static final int OopsMessage=0x7f080008;
         public static final int OopsTitle=0x7f080007;
         public static final int OopsTryAgain=0x7f080009;

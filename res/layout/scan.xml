@@ -40,9 +40,11 @@
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:layout_above="@+id/ScanButton"
         android:layout_alignLeft="@+id/scanText"
         android:layout_below="@+id/scanText"
-        android:layout_marginTop="46dp">
+        android:layout_marginTop="46dp" >
+
     </RelativeLayout>
 
 </RelativeLayout>

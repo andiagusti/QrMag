@@ -38,7 +38,6 @@ import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -47,11 +46,10 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ScanActivity extends Activity
 {
-	// Some variables
+	// Required vars
     private Camera sCam;
     boolean funnylmsg;
     private QrScanClass qrPrev;
@@ -115,7 +113,7 @@ public class ScanActivity extends Activity
         qrPrev = new QrScanClass(this, sCam, previewCb, autoFocusCB); // Initialize QR scanning class
         
         // Get a reference to the layout where we will be displaying the preview
-        final RelativeLayout preview = (RelativeLayout)findViewById(R.id.cameraPreview);
+        final RelativeLayout preview = v1;
         
         // Animation event handlers
         a1.setAnimationListener(new AnimationListener() {    
@@ -134,14 +132,13 @@ public class ScanActivity extends Activity
             @Override
             public void onAnimationEnd(Animation animation) {
 
-            	// Moved this line to here in order to make animations smoother// 
+            	// Moved this line to here in order to make animations smoother // 
             	
                 preview.addView(qrPrev); // Add the preview to the layout
             }
         });
         
-        // Well, you should be now knowing what the next two lines of code do
-        retryButton = (Button)findViewById(R.id.ScanButton);
+        retryButton = v3;
 
         // Listen for retry button click
         retryButton.setOnClickListener(new OnClickListener() {

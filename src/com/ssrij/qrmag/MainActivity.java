@@ -25,11 +25,17 @@
 package com.ssrij.qrmag;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,14 +43,16 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
+	// Required vars
 	int voltimes = 0;
 	boolean funnylmsg = false;
+	boolean networkAvail;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		checkNetworkAvail();    
 		// Initialize animations
 		Animation a = new TranslateAnimation(1000,0,0,0);
 		Animation a1 = new TranslateAnimation(1000,0,0,0);
@@ -75,14 +83,36 @@ public class MainActivity extends Activity {
         v2.startAnimation(a2);
         v3.startAnimation(a3);
 	
+        a3.setAnimationListener(new AnimationListener() {    
+            @Override
+            public void onAnimationStart(Animation animation) {  
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            if (networkAvail == false) { ShowNetworkError(); }
+            }
+        });
 	}
 	
 	public void ScanQr(View v) {
-		// Open the QR Scan page
+		// Check if internet is available and open the QR scan page if it is
+		checkNetworkAvail();
+		if (!networkAvail == false) { 
 		Intent a = new Intent(MainActivity.this, ScanActivity.class);
 		a.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 		if (funnylmsg == true) { a.putExtra("useFunnyLoadingMessage", true); }
-        startActivity(a);
+        startActivity(a); } 
+		// Internet isn't available, alert user
+		else { ShowNetworkError(); }
 	}
 	
 	// Easter egg: Show a witty loading message on the loading screen 
@@ -91,9 +121,28 @@ public class MainActivity extends Activity {
   	  
         if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)){ voltimes = voltimes + 1; }
       	if (voltimes == 3) { funnylmsg = true;
-      	Toast.makeText(getApplicationContext(), "Funny loading message easter egg activated!", 2000).show(); }
+      	Toast.makeText(getApplicationContext(), "Funny loading message easter egg activated! ", Toast.LENGTH_LONG).show(); }
         return true;
         
+    }
+    
+    @SuppressWarnings("deprecation")
+	public void ShowNetworkError() {
+    // Tell the user that internet isn't available on the device
+    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    alertDialog.setTitle("Argh");
+    alertDialog.setMessage("You must be connected to the internet in order to use this application: Please make sure WiFi or mobile data is turned on and working.");
+    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+    public void onClick(DialogInterface dialog, int which) {}});
+    alertDialog.setIcon(R.drawable.ic_launcher);
+    alertDialog.show();
+    }
+    
+    public void checkNetworkAvail() {
+    // Check if internet is available or not
+    	ConnectivityManager connectMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectMgr.getActiveNetworkInfo();
+		if (networkInfo != null && networkInfo.isConnected()) { networkAvail = true; } else { networkAvail = false; }
     }
 
 }
